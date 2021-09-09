@@ -4,6 +4,12 @@ trigger:
 pool: Linux
 
 steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo $PATH
+      echo $M2_HOME
 - task: Maven@3
   inputs:
     mavenPomFile: 'app/pom.xml'
