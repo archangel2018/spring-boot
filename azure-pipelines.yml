@@ -1,8 +1,7 @@
 trigger:
 - master
 
-pool:
-  Linux
+pool: Linux
 
 steps:
 - task: Maven@3
