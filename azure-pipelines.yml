@@ -1,0 +1,29 @@
+trigger:
+- master
+
+pool:
+  Linux
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'app/pom.xml'
+    publishJUnitResults: true
+    codeCoverageToolOption: 'Cobertura'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**/*.jar'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    preserveTimestamp: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'sample-sp-java'
+    publishLocation: 'Container'
