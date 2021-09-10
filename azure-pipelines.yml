@@ -20,8 +20,7 @@ steps:
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
+    sonarQubeRunAnalysis: false
     checkStyleRunAnalysis: true
     pmdRunAnalysis: true
     findBugsRunAnalysis: true
@@ -30,8 +29,8 @@ steps:
   inputs:
     SonarCloud: 'Sonar_Cloud'
     organization: 'archangel2018'
-    scannerMode: 'MSBuild'
-    projectKey: 'archangel2018_spring-boot'
+    scannerMode: 'Other'
+    extraProperties: 
 - task: SonarCloudAnalyze@1
 - task: SonarCloudPublish@1
   inputs:
