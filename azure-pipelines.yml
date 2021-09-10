@@ -14,11 +14,28 @@ steps:
   inputs:
     mavenPomFile: 'app/pom.xml'
     publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     codeCoverageToolOption: 'Cobertura'
+    javaHomeOption: 'JDKVersion'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
+    checkStyleRunAnalysis: true
+    pmdRunAnalysis: true
+    findBugsRunAnalysis: true
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'Sonar_Cloud'
+    organization: 'archangel2018'
+    scannerMode: 'MSBuild'
+    projectKey: 'archangel2018_spring-boot'
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: CopyFiles@2
   inputs:
