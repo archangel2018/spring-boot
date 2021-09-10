@@ -9,10 +9,12 @@ steps:
     SonarCloud: 'Sonar_Cloud'
     organization: 'archangel2018'
     scannerMode: 'Other'
-    extraProperties: 
+    extraProperties:
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'app/pom.xml'
+    options: '-Dsonar.projectKey=archangel2018_spring-boot'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
